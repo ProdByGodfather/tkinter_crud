@@ -92,10 +92,24 @@ def delete():
 
     con.commit()
 
-
+def about():
+    messagebox.showinfo("About","About You")
 
 win = tk.Tk()
 win.title("Show Users")
+win.resizable(False,False)
+# Menu
+menu = tk.Menu(win)
+win.config(menu=menu)
+filemenu = tk.Menu(menu, tearoff = 0)
+menu.add_cascade(label='File', menu=filemenu)
+filemenu.add_command(label='Insert Data',command=insert)
+filemenu.add_separator()
+filemenu.add_command(label='Exit', command=win.quit)
+helpmenu = tk.Menu(menu, tearoff = 0)
+menu.add_cascade(label='Help', menu=helpmenu)
+helpmenu.add_command(label='About',command=about)
+
 
 ls = tk.Listbox(win,width=100)
 users = cur.execute("SELECT * FROM users")
@@ -108,11 +122,11 @@ btn1 = tk.Button(frame,text='Insert Data',command=insert)
 btn2 = tk.Button(frame,text="Delete Data",command=delete)
 btn3 = tk.Button(frame,text="Update Data",command=update)
 
-ls.grid(row=0,column=0)
-frame.grid(row=1,column=0)
-btn1.grid(row=1,column=0)
-btn2.grid(row=1,column=1)
-btn3.grid(row=1,column=2)
+ls.grid(row=1,column=1)
+frame.grid(row=2,column=1)
+btn1.grid(row=2,column=0)
+btn2.grid(row=2,column=1)
+btn3.grid(row=2,column=2)
 
 
 
